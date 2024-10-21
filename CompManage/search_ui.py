@@ -56,8 +56,8 @@ class Search_Ui(QMainWindow, Ui_MainWindow):
                 with pd.ExcelWriter('data/Components.xlsx', engine='openpyxl', mode='a',
                                     if_sheet_exists='replace') as writer:
                     self.sheet.to_excel(writer, sheet_name=self.CompType, index=False)
-            else:
-                self.ShowErrorPick()
+        else:
+            self.ShowErrorPick()
         pass
 
     def CompSearch(self):
@@ -79,7 +79,9 @@ class Search_Ui(QMainWindow, Ui_MainWindow):
                 self.lcdNumber.display(self.CompNum)
                 pass
             else:
-                self.ShowErrorSearch()
+                self.NotExist()
+        else:
+            self.ShowErrorSearch()
 
     def GetText(self):
         self.CompName = self.lineEdit_name.text()
@@ -103,4 +105,9 @@ class Search_Ui(QMainWindow, Ui_MainWindow):
         self.GetText()
         TeachingTip.create(target=self.pushButton_pick, icon=InfoBarIcon.ERROR, title="Error",
                            content="缺少所拿取器件的属性",
+                           isClosable=True, duration=2000, parent=self)
+
+    def NotExist(self):
+        TeachingTip.create(target=self.pushButton_search, icon=InfoBarIcon.ERROR, title="Error",
+                           content="此元件尚未入库",
                            isClosable=True, duration=2000, parent=self)

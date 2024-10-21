@@ -2,7 +2,7 @@ import openpyxl
 import pandas as pd
 from PyQt6.QtWidgets import QMainWindow
 from UI.creat import Ui_MainWindow
-from qfluentwidgets import TeachingTip, InfoBarIcon
+from qfluentwidgets import TeachingTip, InfoBarIcon,Flyout,FlyoutAnimationType
 
 
 class Create_Ui(QMainWindow, Ui_MainWindow):
@@ -51,6 +51,7 @@ class Create_Ui(QMainWindow, Ui_MainWindow):
             with pd.ExcelWriter('data/Components.xlsx', engine='openpyxl', mode='a',
                                 if_sheet_exists='replace') as writer:
                 self.sheet.to_excel(writer, sheet_name=self.CompType, index=False)
+            self.CreateFinish()
         else:
             self.ShowErrorCreate()
 
@@ -68,6 +69,7 @@ class Create_Ui(QMainWindow, Ui_MainWindow):
             with pd.ExcelWriter('data/Components.xlsx', engine='openpyxl', mode='a',
                                 if_sheet_exists='replace') as writer:
                 self.sheet.to_excel(writer, sheet_name=self.CompType, index=False)
+                self.DeleteFinish()
         else:
             self.ShowErrorDelete()
 
@@ -83,4 +85,30 @@ class Create_Ui(QMainWindow, Ui_MainWindow):
 
     def ComboBox(self):
         print("1")
+        pass
+
+    def CreateFinish(self):
+        self.GetText()
+        Flyout.create(
+            icon=InfoBarIcon.SUCCESS,
+            title="器件创建成功",
+            content=f"已成功创建{self.CompNum}个{self.CompName}，封装为{self.CompPackage}",
+            target=self.pushButton_create,
+            parent=self,
+            aniType=FlyoutAnimationType.PULL_UP,
+            isClosable=True
+        )
+        pass
+
+    def DeleteFinish(self):
+        self.GetText()
+        Flyout.create(
+            icon=InfoBarIcon.SUCCESS,
+            title="器件已经删除",
+            content=f"已成功删除个封装为{self.CompPackage}的{self.CompName}，",
+            target=self.pushButton_delete,
+            parent=self,
+            aniType=FlyoutAnimationType.PULL_UP,
+            isClosable=True
+        )
         pass
