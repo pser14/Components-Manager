@@ -99,7 +99,7 @@ class Ui_MainWindow(object):
         self.label_type.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_type.setObjectName("label_type")
         self.verticalLayout_4.addWidget(self.label_type)
-        self.comboBox_type = EditableComboBox(parent=self.centralwidget)
+        self.comboBox_type = ComboBox(parent=self.centralwidget)
         self.comboBox_type.setObjectName("comboBox_type")
         self.verticalLayout_4.addWidget(self.comboBox_type)
         self.horizontalLayout.addLayout(self.verticalLayout_4)
@@ -159,4 +159,4 @@ class Ui_MainWindow(object):
         self.label_type.setText(_translate("MainWindow", "器件的类型"))
         self.label_num.setText(_translate("MainWindow", "器件的数量"))
         self.pushButton_clear.setText(_translate("MainWindow", "清除选项"))
-from qfluentwidgets import CaptionLabel, EditableComboBox, LineEdit, PrimaryPushButton, SpinBox
+from qfluentwidgets import CaptionLabel, ComboBox, LineEdit, PrimaryPushButton, SpinBox
